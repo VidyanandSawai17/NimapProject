@@ -1,0 +1,36 @@
+﻿@model NimapProject.Models.Category
+@{
+    ViewData["Title"] = "DeleteCat";
+}
+
+<h1>DeleteCategory</h1>
+
+<form asp-action="DeleteCat">
+
+    <table>
+        <tr>
+            <td>
+                Enter Category Id
+            </td>
+            <td>
+                <input type="text" asp-for="CategoryId" readonly />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Enter Category Name
+            </td>
+            <td>
+                <input type="text" asp-for="CategoryName" readonly />
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <input type="submit" value="Delete" />
+            </td>
+        </tr>
+    </table>
+</form>
+

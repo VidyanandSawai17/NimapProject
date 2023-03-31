@@ -1,0 +1,26 @@
+﻿@model IEnumerable<NimapProject.Models.Product>
+@{
+    ViewData["Title"] = "List";
+}
+@Html.ActionLink("Add Product","AddProd")
+<table class="table">
+    <tr>
+        <th>Product Id</th>
+        <th>Product Name</th>
+        <td>Category Id</td>
+        <th>Actions</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ProductId</td>
+            <td>@item.ProductName</td>
+            <td>@item.CategoryId</td>
+            <td>
+                @Html.ActionLink("Edit","EditProd",new {id=item.ProductId}) |
+                @Html.ActionLink("Delete","DeleteProd",new {id=item.ProductId})
+            </td>
+        </tr>
+    }
+
+</table>

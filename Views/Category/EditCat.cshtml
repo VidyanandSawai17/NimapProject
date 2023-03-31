@@ -1,0 +1,35 @@
+﻿@model NimapProject.Models.Category
+@{
+    ViewData["Title"] = "EditCat";
+}
+
+<h1>EditCategory</h1>
+
+<form asp-action="EditCat">
+
+    <table>
+        <tr>
+            <td>
+                Enter Category Id
+            </td>
+            <td>
+                <input type="text" asp-for="CategoryId" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Enter Category Name
+            </td>
+            <td>
+                <input type="text" asp-for="CategoryName" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <input type="submit" value="Update" />
+            </td>
+        </tr>
+    </table>
+</form>
