@@ -45,7 +45,7 @@ namespace NimapProject.Models
 
         public int AddProd(Product p)
         {
-            string str = "insert into Product values(@ProductId, @ProductName @CategoryId)";
+            string str = "insert into Product values(@ProductId, @ProductName, @CategoryId)";
             cmd = new SqlCommand(str, con);
             cmd.Parameters.AddWithValue("@ProductId", p.ProductId);
             cmd.Parameters.AddWithValue("@ProductName", p.ProductName);
@@ -58,9 +58,9 @@ namespace NimapProject.Models
 
         public int UpdateProd(Product p)
         {
-            string str = "update Product set ProductName=@ProductName, CategoryId=@CategoryId where Id=@id";
+            string str = "update Product set ProductName=@ProductName, CategoryId=@CategoryId where ProductId=@id";
             cmd = new SqlCommand(str, con);
-            cmd.Parameters.AddWithValue("@ProductId", p.ProductId);
+            cmd.Parameters.AddWithValue("@id", p.ProductId);
             cmd.Parameters.AddWithValue("@ProductName", p.ProductName);
             cmd.Parameters.AddWithValue("@CategoryId", p.CategoryId);
             con.Open();
@@ -85,7 +85,7 @@ namespace NimapProject.Models
             Product p = new Product();
             string query = "select * from Product where ProductId=@id";
             cmd = new SqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@ProductId", id);
+            cmd.Parameters.AddWithValue("@id", id);
             con.Open();
             reader = cmd.ExecuteReader();
             if (reader.HasRows)
@@ -94,6 +94,7 @@ namespace NimapProject.Models
                 {
                     p.ProductId = Convert.ToInt32(reader["ProductId"]);
                     p.ProductName = reader["ProductName"].ToString();
+                    p.CategoryId = Convert.ToInt32(reader["CategoryId"]);
                 }
             }
             con.Close();

@@ -1,0 +1,41 @@
+﻿@model NimapProject.Models.Product
+@{
+    ViewData["Title"] = "DeleteProd";
+}
+
+<h1>DeleteProd</h1>
+
+<form asp-action="DeleteProd">
+     <table>
+        <tr>
+            <td>
+                Enter Product Id
+            </td>
+            <td>
+                <input type="text" asp-for="ProductId" readonly  />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Enter Product Name
+            </td>
+            <td>
+                <input type="text" asp-for="ProductName" readonly />
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <tr>
+            <td>
+                Enter Category Id
+            </td>
+            <td>
+                <input type="text" asp-for="CategoryId" readonly />
+            </td>
+        </tr>
+            <td>
+                <input type="submit" value="Delete" />
+            </td>
+    </table>
+</form>
