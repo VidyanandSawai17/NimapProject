@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
 using NimapProject.Models;
 using System;
@@ -12,15 +13,42 @@ namespace NimapProject.Controllers
     {
         private readonly IConfiguration configuration;
         ProductDAL db;
+        CategoryDAL cat;
         public ProductController(IConfiguration configuration)
         {
             this.configuration = configuration;
             db = new ProductDAL(configuration);
+            cat=new CategoryDAL(configuration); 
         }
-        public IActionResult List()
+        public IActionResult List(int pg=1)
         {
             var model = db.ProductList();
-            return View(model);
+            var catlist=cat.CategoryList();
+            foreach (var p in model)
+            {
+                foreach (var c in catlist)
+                {
+                    if (c.CategoryId == p.CategoryId)
+                    {
+                        p.CategoryName=c.CategoryName;
+                    }
+                }
+            }
+            const int pagesize = 5;
+            if (pg < 1)
+            {
+                pg = 1;
+            }
+            int recscount = model.Count();
+
+            var pager = new Pager(recscount, pg, pagesize);
+
+            int recskip = (pg - 1) * pagesize;
+
+            var data = model.Skip(recskip).Take(pager.PageSize).ToList();
+
+            this.ViewBag.Pager = pager;
+            return View(data);
         }
         [HttpGet]
         public IActionResult AddProd()
